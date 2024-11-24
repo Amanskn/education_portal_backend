@@ -48,6 +48,8 @@ async function createACourse(req, res) {
     });
   }
 
+  // console.log("@@@@@@", newCourse);
+
   const newlyCreatedCourse = await Course.create(newCourse);
   return res.status(StatusCodes.CREATED).json({
     message: "created a course successfully",
