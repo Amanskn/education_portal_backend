@@ -76,10 +76,9 @@ async function updateACourse(req, res) {
 
 // ======================= controller for deleting a course
 async function deleteACourse(req, res) {
+  console.log("Inside deleteACourse");
   const { courseId } = req.params;
-  console.log("courseId ###", courseId);
   const deletedCourse = await Course.findByIdAndDelete(courseId);
-  console.log("Deleted course id ", deletedCourse);
   return res.status(StatusCodes.OK).json({
     message: "course  deleted successfully",
     statusCode: StatusCodes.OK,

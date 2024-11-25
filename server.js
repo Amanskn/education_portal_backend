@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const { centralRouter } = require("./routes/centralRouter");
 const { connectDB } = require("./connectDB");
+const { StatusCodes } = require("http-status-codes");
 
 // ============Creating a server instance
 const app = express();
@@ -10,7 +11,7 @@ const app = express();
 app.use(express.urlencoded());
 app.use(express.json());
 
-const { PORT, MONGO_URI, DB_NAME } = process.env;
+const { PORT = 3000, MONGO_URI, DB_NAME } = process.env;
 app.use(cors());
 
 // ===============For testing purpose
@@ -54,6 +55,13 @@ const courses = [
   // Add more courses
 ];
 
+app.get("/health", (req, res) => {
+  return res.status(StatusCodes.OK).json({
+    message: "Server is working fine",
+    statusCode: StatusCodes.OK,
+    data: null,
+  });
+});
 app.use("/api/v1", centralRouter);
 
 app.listen(PORT, async (err) => {
